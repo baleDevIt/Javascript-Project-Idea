@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Changer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2 id="hex">#FFFFFF</h2>
+        <p>Click to change color</p>
+    </div>
+    <script>
+        const hex = document.getElementById('hex');
+
+        document.addEventListener('click', () => {
+            let red, green, blue;
+            let color = () => {return Math.round(Math.random() * 255)}
+            let rgbToHex = (rgb) => { 
+                var hex = Number(rgb).toString(16);
+                if (hex.length < 2) {
+                     hex = "0" + hex;
+                }
+                return hex;
+              };
+            
+            red = color();
+            green = color();
+            blue = color();
+
+            let rgbNotation = `rgb(${red}, ${green}, ${blue})`
+            let hexNotation = `#${rgbToHex(red)}${rgbToHex(green)}${rgbToHex(blue)}`
+
+            document.body.style.backgroundColor = rgbNotation;
+            hex.innerHTML = hexNotation
+        })
+    </script>
+</body>
+</html>
