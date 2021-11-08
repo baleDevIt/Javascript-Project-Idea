@@ -1,0 +1,86 @@
+body {
+    display:flex;
+    justify-content: center;
+    background-color: #C8CDE5;
+  }
+  
+  .frame {
+    font-size: 24px;
+    background-color: #164249;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 2%;
+    margin: 40px 20px 20px 20px;
+  }
+  
+  button {
+    color: #164249;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    margin: 5px;
+    box-shadow: 3px 3px 3px #C8CDE5;
+    font-size: 30px;
+    background-color: #FFFFFF;
+
+  }
+  
+  button:active {
+    color: #A01C32;
+  }
+  
+  button:focus {
+    outline: 0;
+  }
+  
+  button:hover {
+    background: linear-gradient(145deg, #FFFFFF, #C8CDE5);
+  }
+  
+  .top {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .functionbox {
+    display: inline-block;
+  }
+  
+  output {
+    font-size: 20px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    width: 180px;
+    height: 26px;
+    display: block;
+    background-color: #FFFFFF;
+    margin-top: 12px;
+    margin-bottom: 20px;
+    box-shadow: 1px 2px 2px#C8CDE5;
+    color: #164249;
+  }
+  
+  .buttonclear {
+    margin-right: 10px;
+    margin-left: 0;
+    border-radius: 50px;
+  }
+  
+  .operator {
+    background-color: #A01C32;
+    color: #FFFFFF
+  }
+  .operator:hover{
+    background: linear-gradient(145deg, #A01C32, #c0213c9a);
+  }
+  
+  @media screen and (min-width: 700px) {
+    button {
+
+  }
+    output {
+
+    }
+}

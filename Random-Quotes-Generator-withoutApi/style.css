@@ -8,14 +8,18 @@ body{
     flex-direction: column;
     align-items: center;
     font-size: 16px;
+    min-height: 576px;
+    min-width: 600px;
+
     
 }
 
 .blok-quote{
-    margin-top: 50vh;
+    margin-top: 45vh;
 
     text-align: center;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0 15vh;
 }
 
 h1{
@@ -24,9 +28,10 @@ h1{
 }
 
 h6{
-    text-align: end;
+    text-align: center;
     color: rgb(51, 51, 51);
     font-family: 'Courier New', Courier, monospace;
+    margin-top: 13px;
 }
 
 button{
