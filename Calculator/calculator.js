@@ -1,70 +1,37 @@
-// const oneBtn = document.getElementById('one')
-// const twoBtn = document.getElementById('two')
-// const threeBtn = document.getElementById('three')
-// const fourBtn = document.getElementById('four')
-// const fiveBtn = document.getElementById('five')
-// const sixBtn = document.getElementById('six')
-// const sevenBtn = document.getElementById('seven')
-// const eightBtn = document.getElementById('eight')
-// const nineBtn = document.getElementById('nine')
-// const zeroBtn = document.getElementById('zero')
-// const divideBtn = document.getElementById('divide')
-// const multiplyBtn = document.getElementById('multiply')
-// const subtractBtn = document.getElementById('subtract')
-// const addBtn = document.getElementById('add')
-// const equalsBtn = document.getElementById('equals')
-
+//Init
 const decimalBtn = document.getElementById('decimal')
 const clearBtn = document.getElementById('clear')
 const screenOut = document.getElementById('result')
 const equalsBtn = document.getElementById('equals')
-let toCalculating = [];
+let memory = [];
 let temp = '';
+let operatorIsEnable = true;
 const sign = ['+', '-', '*', '/']
 
-clearBtn.addEventListener('click', () => {
-    clearOutput()
-})
+calculator();
 
-equalsBtn.addEventListener('click', () => {
-    resultProcess();
-})
+//Start 
+function calculator(){
+    initNumberElement()
+    initOperatorElement()
 
-function resultProcess(){
-    if(toCalculating.includes('*')){
-        moltipy(toCalculating.indexOf('*'))
-    }else if (toCalculating.includes('/')){
-        divisor(toCalculating.indexOf('/'))
-    }else if (toCalculating.includes('-')){
-        subtractor(toCalculating.indexOf('-'))
-    }else if(toCalculating.includes('+')){
-        summum(toCalculating.indexOf('+'))
-    }
-    changeVisualOut()
+    clearBtn.addEventListener('click', () => {
+        clearOutput()
+    })
+    
+    equalsBtn.addEventListener('click', () => {
+        resultProcess();
+    })
+    
+    decimalBtn.addEventListener('click', () => {
+        if(memoryIsFull()){
+            return 
+        }
+        temp = temp + '.';
+        addNumberToStorage(temp)
+    })
+
 }
-
-function moltipy(iElement){
-    let calc = Number.parseFloat(toCalculating[iElement-1]) * Number.parseFloat(toCalculating[iElement+1])
-    toCalculating.splice(iElement-1, 3, calc.toString())
-}
-
-function divisor(iElement){
-    let calc = Number.parseFloat(toCalculating[iElement-1]) / Number.parseFloat(toCalculating[iElement+1])
-    toCalculating.splice(iElement-1, 3, calc.toString())
-}
-
-function subtractor(iElement){
-    let calc = Number.parseFloat(toCalculating[iElement-1]) - Number.parseFloat(toCalculating[iElement+1])
-    toCalculating.splice(iElement-1, 3, calc.toString())
-}
-
-function summum(iElement){
-    let calc = 0;
-    calc = Number.parseFloat(toCalculating[iElement-1]) + Number.parseFloat(toCalculating[iElement+1])
-    toCalculating.splice(iElement-1, 3, calc.toString())
-}
-
-
 
 function initNumberElement() {
     let idReference = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
@@ -73,10 +40,12 @@ function initNumberElement() {
     for (let i = 0; i < idReference.length; i++) {
       const id = idReference[i];
       const element = document.getElementById(id);
-  
       numberElementReference.push(element);
   
       element.addEventListener("click", () => {
+        if(memoryIsFull()){
+            return 
+          }
         temp = temp + String(i);
         addNumberToStorage(temp)
       });
@@ -96,48 +65,96 @@ function initOperatorElement(){
         numberOperatorReference.push(element)
 
         element.addEventListener('click', () => {
-            addSignToStorage(sign[i])
-        })
-        
+            if(!operatorIsPresent()) {
+                addSignToStorage(sign[i])
+            }
+        })        
     }
-    return numberOperatorReference;
+}
+
+//Operation
+function moltipy(iElement){
+    let calc = Number.parseFloat(memory[iElement-1]) * Number.parseFloat(memory[iElement+1])
+    memory.splice(iElement-1, 3, calc.toString())
+}
+
+function divisor(iElement){
+    let calc = Number.parseFloat(memory[iElement-1]) / Number.parseFloat(memory[iElement+1])
+    memory.splice(iElement-1, 3, calc.toString())
+}
+
+function subtractor(iElement){
+    let calc = Number.parseFloat(memory[iElement-1]) - Number.parseFloat(memory[iElement+1])
+    memory.splice(iElement-1, 3, calc.toString())
+}
+
+function summum(iElement){
+    let calc = 0;
+    calc = Number.parseFloat(memory[iElement-1]) + Number.parseFloat(memory[iElement+1])
+    memory.splice(iElement-1, 3, calc.toString())
+}
+
+//Utils
+function resultProcess(){
+    if(memory.includes('*')){
+        moltipy(memory.indexOf('*'))
+    }else if (memory.includes('/')){
+        divisor(memory.indexOf('/'))
+    }else if (memory.includes('-')){
+        subtractor(memory.indexOf('-'))
+    }else if(memory.includes('+')){
+        summum(memory.indexOf('+'))
+    }
+    changeVisualOut()
+    temp = memory[0];
+}
+
+function memoryIsFull(){
+    if(memory.join('').length > 11){
+        return true}
+    else{
+        return false}
+}
+
+function operatorIsPresent(){
+    return sign.includes(memory[1])
+}
+
+function disableOperator(){
+    operatorIsEnable = false;
+}
+
+function enableOperator(){
+    operatorIsEnable = true;
 }
 
 function changeVisualOut() {
     let outputToVisual = '';
-    for (let indexElement = 0; indexElement < toCalculating.length; indexElement++) {
-        outputToVisual += ` ${toCalculating[indexElement]}`
+    for (let indexElement = 0; indexElement < memory.length; indexElement++) {
+        outputToVisual += ` ${memory[indexElement]}`
         
     }
     screenOut.value = outputToVisual;
-    console.log(toCalculating)
+    console.log(memory)
 }
 
 function addNumberToStorage(numberToAdd){
-        if(!sign.includes(toCalculating[toCalculating.length -1]))
-            toCalculating.splice(toCalculating.length -1, 1, numberToAdd)
+        if(!sign.includes(memory[memory.length -1]))
+            memory.splice(memory.length -1, 1, numberToAdd)
         else
-            toCalculating.push(numberToAdd)
+            memory.push(numberToAdd)
         changeVisualOut()
 }
 
 function addSignToStorage(signToAdd){
-    toCalculating.push(signToAdd)
+    memory.push(signToAdd)
     temp = '';
     changeVisualOut()
 }
 
 function clearOutput(){
-    toCalculating = []
+    memory = []
     temp = ''
+    enableOperator()
     changeVisualOut()
 }
-
-
-// Da implementare utilizzo della virgola!
-// Implementare logica di priorità di segno sui segni + e -
-// Stessa implementazione della problematica su per i segni / e *
-
-initNumberElement()
-initOperatorElement()
-clearOutput()

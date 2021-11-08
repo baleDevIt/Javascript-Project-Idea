@@ -75,12 +75,12 @@ body {
   .operator:hover{
     background: linear-gradient(145deg, #A01C32, #c0213c9a);
   }
-  
-  @media screen and (min-width: 700px) {
-    button {
 
+  .equal {
+    background-color: #A01C32;
+    color: #FFFFFF
   }
-    output {
-
-    }
-}
+  .equal:hover{
+    background: linear-gradient(145deg, #A01C32, #c0213c9a);
+  }
+  
