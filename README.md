@@ -27,7 +27,7 @@ Feel free to share your version of the individual projects or add new challenges
 ---
 
 ## How To Use
-Read the requests of each project inside references section and play it. A **Readme** file will give you simple instructions to work with, it's up to you to choose the best way to fix the problem. 
+Read the requests of each project inside references section and play it. A **Readme** file will give you simple instructions to work with, it's up to you to choose the best way to fix the problem.
 
 
 [Back To The Top](#read-me-template)
@@ -61,12 +61,7 @@ If you want to increase the difficulty, it is advisable to remove the last const
 
 [Real Example](https://www.gbale.it/project/Random-Quotes-Generator-withoutApi/index.html)
 
-![Project Image](project-image-url)
-
-
- ### BMI Calculator
- ### Event Countdown Timer
-
+![Project Image](https://www.gbale.it/project/Calculator/calculator.png)
 
 [Back To The Top](#read-me-template)
 
